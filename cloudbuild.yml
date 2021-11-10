@@ -5,8 +5,7 @@ steps:
     - '-c'
     - |
         cd spring-petclinic
-        chmod +x mvnw
-        ./mvnw clean install
+        mvn clean install
         cd spring-petclinic-server
         mvn clean package docker:build
 
