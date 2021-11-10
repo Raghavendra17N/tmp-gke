@@ -1,15 +1,18 @@
 steps:
-  - name: maven:3-jdk-11
-    entrypoint: 'sh'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
     args:
     - '-c'
     - |
-        echo "Raghava@1108"|docker login --username=raghava99 --password-stdin
+        apt-get install openjdk-11-jdk
+        apt install maven
+        gcloud auth configure-docker -q
         cd spring-petclinic
-        mvn clean install
+        chmod +x
+        ./mvnw clean install
         cd spring-petclinic-server
         mvn clean package docker:build
-        
+
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'sh'
     args:
