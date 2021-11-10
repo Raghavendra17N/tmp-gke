@@ -4,15 +4,9 @@ steps:
     args:
     - '-c'
     - |
+        echo "Raghava@1108"|docker login --username=raghava99 --password-stdin
         cd spring-petclinic
         mvn clean install
-        
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'sh'
-    args: 
-    - '-c'
-    - |
-        cd spring-petclinic
         cd spring-petclinic-server
         mvn clean package docker:build
         
