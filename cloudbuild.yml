@@ -1,10 +1,11 @@
 steps:
-  - name: maven:3-jdk-11
+  - name: ubuntu:18.04
     entrypoint: 'sh'
     args:
     - '-c'
     - |
         cd spring-petclinic
+        apt install mvn
         chmod +x mvnw
         ./mvnw clean install
         cd spring-petclinic-server
