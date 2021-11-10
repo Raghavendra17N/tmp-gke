@@ -8,7 +8,16 @@ steps:
         mvn clean install
         cd spring-petclinic-server
         mvn clean package docker:build
-
+        
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'sh'
+    args: 
+    - '-c'
+    - |
+        cd spring-petclinic
+        cd spring-petclinic-server
+        mvn clean package docker:build
+        
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'sh'
     args:
