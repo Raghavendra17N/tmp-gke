@@ -1,11 +1,11 @@
 steps:
-  - name: maven:3-jdk-11
-    entrypoint: 'sh'
+  - name: 'maven:3-jdk-11'
+    entrypoint: 'bash'
     args:
     - '-c'
     - |
         cd spring-petclinic
-        chmod +x mvnw
+        chmod +x
         ./mvnw clean install
         cd spring-petclinic-server
         mvn clean package docker:build
