@@ -1,0 +1,18 @@
+steps:
+  - name: maven:3-jdk-11
+    entrypoint: 'sh'
+    args:
+    - '-c'
+    - |
+        cd spring-petclinic
+        ./mvnw clean install
+        cd spring-petclinic-server
+        mvn clean package docker:build
+
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'sh'
+    args:
+    - '-c'
+    - |
+       docker tag springboot-petclinic-actions gcr.io/$PROJECT_ID/springboot-petclinic-actions:$SHORT_SHA
+       docker push gcr.io/$PROJECT_ID/springboot-petclinic-actions:$SHORT_SHA
